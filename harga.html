@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop</title>
+
+    <!-- Feather Icons -->
+    <link rel="stylesheet" href="fa/css/fa.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Icons -->
+    <link rel="icon" type="image/ico" href="img/bunga1.ico">
+
+    <!-- My Style -->
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 10px;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background: url(img/44d91f5452266d5a27c2da6fe5317614.jpg);
+
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select,
+        input,
+        button {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hasil-box {
+            background-color: #f9f9f9;
+            color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hasil-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        .hasil-box.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            display: none;
+        }
+
+        .hasil-box p {
+            margin: 5px 0;
+        }
+
+        .hasil-box span {
+            color: #4CAF50;
+            font-size: 20px;
+        }
+
+        .hasil-box span.red {
+            color: #e74c3c;
+        }
+
+        .back {
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-size: 1.4rem;
+            color: #fff;
+            background-color: var(--primary);
+            border-radius: 0.5rem;
+            box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+        }
+
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Website Toko Bunga</h1>
+        <p>Selamat datang di toko bunga kami!</p>
+    </header>
+
+    <!-- Container Utama -->
+    <div class="container">
+        <!-- Dropdown Pilih Bunga -->
+        <label for="pilihBunga">Pilih Jenis Bunga:</label>
+        <select id="pilihBunga" onchange="setHarga()">
+            <option value="">-- Pilih Bunga --</option>
+            <option value="75000">BLUSH HARMONY - Rp 75.000</option>
+            <option value="60000">AMBER SUNSHINE - Rp 60.000</option>
+            <option value="75000">PURPLE SERENITY - Rp 75.000</option>
+            <option value="85000">ROSY ELEGANCE - Rp 85.000</option>
+        </select>
+
+        <!-- Input Harga Satuan -->
+        <label for="hargaBunga">Harga Satuan:</label>
+        <input type="text" id="hargaBunga" placeholder="Harga otomatis" readonly>
+
+        <!-- Input Jumlah Bunga -->
+        <label for="jumlahBunga">Jumlah Bunga:</label>
+        <input type="number" id="jumlahBunga" placeholder="Masukkan jumlah bunga">
+
+        <!-- Tombol Reset -->
+        <button onclick="resetForm()">Reset</button>
+        <!-- Tombol Hitung -->
+        <a href="indeks.html" class="back">Kembali</a>
+
+        <!-- Hasil Perhitungan -->
+        <div id="hasil" class="hasil-box hidden">
+            <div id="detailHasil"></div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer Start -->
+    <footer>
+        <div class="socials">
+            <a href="#"><i data-feather="instagram"></i></a>
+            <a href="#"><i data-feather="twitter"></i></a>
+            <a href="#"><i data-feather="facebook"></i></a>
+        </div>
+
+        <div class="credit">
+            <p>Created by <a href="#">Muhammad Azka</a>. | &copy; 2024</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Feather Icons -->
+    <script>
+        feather.replace();
+    </script>
+
+    <!-- My Javascript -->
+    <script src="js/script.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="fa/js/fa.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        function setHarga() {
+            const selectElement = document.getElementById('pilihBunga');
+            const hargaBunga = document.getElementById('hargaBunga');
+            const harga = selectElement.value;
+
+            // Set harga atau kosongkan input
+            hargaBunga.value = harga
+                ? new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(harga)
+                : "";
+
+            hitungTotal(); // Hitung ulang total
+        }
+
+        function hitungTotal() {
+            const bunga = document.getElementById('pilihBunga');
+            const harga = parseInt(bunga.value);
+            const jumlah = parseInt(document.getElementById('jumlahBunga').value);
+            const hasilBox = document.getElementById('hasil');
+            const detailHasil = document.getElementById('detailHasil');
+
+            // Validasi input
+            if (!harga || jumlah <= 0 || isNaN(jumlah)) {
+                hasilBox.classList.add('hidden');
+                return;
+            }
+
+            // Hitung total harga
+            const total = harga * jumlah;
+
+            // Update tampilan hasil
+            detailHasil.innerHTML = `
+        <p>🌸 <strong>Jenis Bunga:</strong> ${bunga.options[bunga.selectedIndex].text}</p>
+        <p>💰 <strong>Harga Satuan:</strong> <span>Rp ${harga.toLocaleString('id-ID')}</span></p>
+        <p>🔢 <strong>Jumlah:</strong> <span>${jumlah}</span></p>
+        <p>🛒 <strong>Total Harga:</strong> <span class="red">Rp ${total.toLocaleString('id-ID')}</span></p>
+    `;
+            hasilBox.classList.remove('hidden');
+        }
+
+        function resetForm() {
+            document.getElementById('pilihBunga').value = "";
+            document.getElementById('hargaBunga').value = "";
+            document.getElementById('jumlahBunga').value = "";
+            document.getElementById('hasil').classList.add('hidden');
+        }
+
+        // Tambahkan event listener ke input jumlah bunga
+        document.getElementById('jumlahBunga').addEventListener('input', hitungTotal);
+    </script>
+</body>
+
+</html>
